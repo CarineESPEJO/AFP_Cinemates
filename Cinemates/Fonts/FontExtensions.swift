@@ -1,34 +1,30 @@
 //
 //  FontExtensions.swift
-//  App_test
+//  Cinemates
 //
-//  Created by apprenant98 on 27/01/2025.
+//  Created by Carine ESPEJO on 27/01/2025.
 //
 
-
-// FontExtensions.swift
 
 import SwiftUI
 
-// création de .font spéciaux selon nos fonts
+// Create our own special fonts to call (to not be obligated to rewritte them all the time and have issues)
 extension Font {
     
     
     // Teachers
+    // Define a personnalized font size without UIKit
     static func TeachersLargeTitle() -> Font {
-        // Définir une taille de police personnalisée sans UIKit
         return .custom("Teachers-Regular", size: 44)
     }
     
     
     // Staatliches
     static func staatlichesLargeTitle() -> Font {
-        // Définir une taille de police personnalisée sans UIKit
         return .custom("Staatliches-Regular", size: 32)
     }
     
     static func staatlichesTitle2() -> Font {
-        // Définir une taille de police personnalisée sans UIKit
         return .custom("Staatliches-Regular", size: 24)
     }
     
