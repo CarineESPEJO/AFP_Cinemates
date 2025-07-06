@@ -2,7 +2,7 @@
 //  MyMovieListView.swift
 //  Cinemates
 //
-//  Created by apprenant98 on 30/01/2025.
+//  Created by apprenant?? on 30/01/2025.
 //
 
 import SwiftUI
