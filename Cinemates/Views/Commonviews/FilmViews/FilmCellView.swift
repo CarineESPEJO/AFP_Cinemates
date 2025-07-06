@@ -3,31 +3,33 @@
 //  MovieCellView.swift
 //  Cinemates
 //
-//  Created by apprenant98 on 30/01/2025.
+//  Created by Carine ESPEJO on 30/01/2025.
 //
 
 import SwiftUI
 
+//function to show cerate a cartridge of a movie
 struct FilmCellView: View {
+    //it's given a movie to use its infos
     var filmShowed : Film
     var body: some View {
         
         VStack (alignment:.leading, spacing: 8){
-            Image(filmShowed.filmPoster)
+            Image(filmShowed.filmPoster) 
                 .resizable()
                 .frame(width: 175,height: 259)
                 .scaledToFit()
                 .cornerRadius(8)
                 .shadow(radius: 5)
-            if filmShowed.filmName.count > 24 {
+            if filmShowed.filmName.count > 24 { //if the name of the movie is too long, we take the beginning and a ...
                 Text("\(String(filmShowed.filmName.prefix(24)))...")
             } else {
                 Text(filmShowed.filmName)
             }
             HStack (spacing: 8){
-                NotePlatformCellView(notePlatformImage: .alloCineIcon, notePlatform: filmShowed.filmAlloCineRating)
-                NotePlatformCellView(notePlatformImage: .logo, notePlatform: filmShowed.filmCinematesRating)
-                NotePlatformCellView(notePlatformImage: .friendsTalkIcon, notePlatform: filmShowed.filmFriendsRating)
+                NotePlatformCellView(notePlatformImage: .alloCineIcon, notePlatform: filmShowed.filmAlloCineRating) //call function to show note
+                NotePlatformCellView(notePlatformImage: .logo, notePlatform: filmShowed.filmCinematesRating) //same
+                NotePlatformCellView(notePlatformImage: .friendsTalkIcon, notePlatform: filmShowed.filmFriendsRating) //same
                 
             }
             
@@ -39,7 +41,7 @@ struct FilmCellView: View {
     }
 }
 
-
+//function to not repeat same code for each note parts
 struct NotePlatformCellView : View {
     var notePlatformImage : ImageResource
     var notePlatform : Double
@@ -51,7 +53,7 @@ struct NotePlatformCellView : View {
                 .frame(width: 16, height: 16)
                 .cornerRadius(2)
             
-            Text(String(format: "%.1f", notePlatform))
+            Text(String(format: "%.1f", notePlatform)) // transform note into string that is one number after the virgule
                 
             
         }
