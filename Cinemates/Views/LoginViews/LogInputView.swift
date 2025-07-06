@@ -1,6 +1,6 @@
 //
 //  LogInputView.swift
-//  App_test
+//  Cinemates
 //
 //  Created by Carine ESPEJO on 30/01/2025.
 //
