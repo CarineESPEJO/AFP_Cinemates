@@ -2,7 +2,7 @@
 //  UserDataBase.swift
 //  Cinemates
 //
-//  Created by apprenant98 on 30/01/2025.
+//  Created by Carine ESPEJO on 30/01/2025.
 //
 
 import Foundation
@@ -17,10 +17,9 @@ struct User : Identifiable {
     var password: String
     
     // user profil
-    
     var username: String
     var profilPicture: ImageResource
-    var description: String // <= 150 caractères
+    var description: String // <= 150 caracteres
     
     // films
     
@@ -32,7 +31,7 @@ struct User : Identifiable {
 }
 
 
-// Base de données fictive de 6 utilisateurs
+//fictive database of users
 
 var veuveNoire = User(
         email: "john.doe@email.com",
