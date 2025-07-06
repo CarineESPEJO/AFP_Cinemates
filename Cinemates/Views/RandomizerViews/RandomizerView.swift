@@ -10,7 +10,7 @@ import SwiftUI
 
 
 struct RandomizerView: View {
-    
+    //criteria page toggle var
     @State private var critereModal : Bool = false
     
     @State private var isBouncing = false
@@ -353,8 +353,8 @@ struct headView: View {
                     .padding(.horizontal)
                     .padding(.vertical, 4)
             }
+            //show the criteria page
             .sheet(isPresented: $criteresModal) {
-                // Spécifiez la vue que vous voulez afficher dans la feuille
                 FiltersView()
             }
         }
