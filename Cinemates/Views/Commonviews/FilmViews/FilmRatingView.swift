@@ -7,8 +7,10 @@
 
 import SwiftUI
 
+//function rating film pageview
+// As an app POC made by beginners, the teachers doesn't let us make it fonctionnable, the note is not put into the database, just return as a var of the pageview
 struct FilmRatingView: View {
-    var filmNoted: Film = theMatrix
+    var filmNoted: Film
     @State var scenarioRating = 5
     @State var visualRating = 5
     @State var musicRating = 5
@@ -16,17 +18,18 @@ struct FilmRatingView: View {
     @State var commentTooLong : Bool = false
     @Binding var generalNote: Double
     
-    // Calcul de la note moyenne
+    // Calcul of the average Note
     var averageRating: Double {
         Double(scenarioRating + visualRating + musicRating) / 3.0
     }
     
-    // Réactions en fonction de la note moyenne
+    // Structuration of a reaction
     struct Reaction {
         var emote : String
         var punchline : String
     }
     
+     // Reaction based on average rating
     var reaction : Reaction {
         switch averageRating {
         case 4.5...5.0: return Reaction(emote: "😍", punchline : "Banger !!!" )
@@ -36,14 +39,14 @@ struct FilmRatingView: View {
         }
     }
     
-    @Environment(\.dismiss) var dismiss // Ajout de dismiss pour fermer la feuille
+    @Environment(\.dismiss) var dismiss // To dismiss the page
     
     var body: some View {
         VStack(spacing: 10) {
             
             HStack {
                 Button {
-                    dismiss()
+                    dismiss() // button to dismiss the page
                     
                 } label : {
                     HStack {
@@ -70,7 +73,7 @@ struct FilmRatingView: View {
                 Spacer()
                 
                 HStack {
-                Image(systemName: "chevron.left")
+                Image(systemName: "chevron.left") // to have same space at the left and right to center film name
                             .font(.urbanistSubHeadline())
                 Text("Retour")
                     
@@ -85,9 +88,9 @@ struct FilmRatingView: View {
             HStack {
                 VStack(spacing: 16) {
                     // Notation
-                    RatingRow(title: "Scénario", rating: $scenarioRating)
-                    RatingRow(title: "Visuel", rating: $visualRating)
-                    RatingRow(title: "Musique", rating: $musicRating)
+                    RatingRow(title: "Scénario", rating: $scenarioRating) //call function to rate each part
+                    RatingRow(title: "Visuel", rating: $visualRating) //same
+                    RatingRow(title: "Musique", rating: $musicRating)  //same
                 }
                 Spacer()
                 VStack(spacing: 5) {
@@ -95,7 +98,7 @@ struct FilmRatingView: View {
                         .font(.system(size: 125))
                         .frame(maxWidth: .infinity, alignment: .center)
                     
-                    Text("\(String(format: "%.1f", averageRating))")
+                    Text("\(String(format: "%.1f", averageRating))") //show averageNote in string with only 1 number ofter the virgule
                         .font(.largeTitle)
                         .bold()
                         .foregroundColor(.white)
@@ -116,33 +119,34 @@ struct FilmRatingView: View {
             
             Text("Maximum 500 caractères")
                 .font(.urbanistSubHeadline())
-                .foregroundStyle(commentTooLong ? .red : .clear )
-                .padding(.bottom, 10) // Réduit l'espace sous cette ligne
+                .foregroundStyle(commentTooLong ? .red : .clear ) // here at all time but if comment higher than 500 caracteres, it go from invisible to red
+                .padding(.bottom, 10) 
         
             ZStack(alignment: .topLeading) {
-                TextEditor(text: $comment)
+                TextEditor(text: $comment) //zone to add a comment for the film
                     .font(.caption)
                     .background(Color.black)
                     .cornerRadius(8)
                     .overlay(
                         RoundedRectangle(cornerRadius: 8.0)
                             .stroke(.cinemateGrayDark, lineWidth: 1))
-                    .colorScheme(.dark)
+                    .colorScheme(.dark) //change the backgound of the zone into black
                 
-                if comment.isEmpty {
+                if comment.isEmpty { //if no comment, show this text
                     Text("Ajouter un commentaire")
                         .foregroundColor(.cinemateGrayLight)
                         .font(.urbanistSubHeadline())
-                        .padding([.top, .leading], 14) // Décalage pour éviter que le texte de placeholder ne se superpose avec le texte entré
+                        .padding([.top, .leading], 14) // Offset to prevent placeholder text from overlapping with entered text
                 }
             }
             .frame(width: .infinity, height: 150)
             .cornerRadius(8)
 
-            // Bouton Valider
             Button("Valider ma note") {
+                // if comment higher than 500 caracteres, show message invisible in red
                 if comment.count > 500 {
                     commentTooLong = true
+                // else give back the note to use on film pagevieww and dismiss rating pageview
                 } else {
                     generalNote = averageRating
                     dismiss()
@@ -163,7 +167,7 @@ struct FilmRatingView: View {
 
     }
     
-    //ligne de notation
+    //function to show rating row for each parts
     struct RatingRow: View {
         let title: String
         @Binding var rating: Int
@@ -175,8 +179,10 @@ struct FilmRatingView: View {
                     .foregroundColor(.white)
                     .padding(.bottom, 5)
                 HStack {
+                    // it shows 5 stars and when we click on one of them, it give its index as tha value of the rating
                     ForEach(1..<6) { index in
                         Image(systemName: "star.fill" )
+                            // if the index is below or egal at rating, the star is yellow
                             .foregroundColor(index <= rating ? .yellow : .gray)
                             .onTapGesture {
                                 rating = index
