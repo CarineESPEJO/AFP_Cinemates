@@ -2,13 +2,15 @@
 //  LogInputView.swift
 //  App_test
 //
-//  Created by apprenant98 on 30/01/2025.
+//  Created by Carine ESPEJO on 30/01/2025.
 //
 
 
 import SwiftUI
 
+//function to let user input their email o r password
 struct LogInputView: View {
+    //As its work for email and password, it needs element for front an back
     @Binding var logInput : String
     @Binding var wrongLogInput : Bool
     var logLabel : String
@@ -18,19 +20,19 @@ struct LogInputView: View {
     
     
     var body : some View {
-        HStack {
-            Image(systemName: logSymbol)
+        HStack { //input zone
+            Image(systemName: logSymbol) 
                 .foregroundColor(Color.gray)
                 .imageScale(.large)
                 .padding(.leading)
             
-            ZStack(alignment: .leading) {
-                if logInput.isEmpty {
+            ZStack(alignment: .leading) { 
+                if logInput.isEmpty { //if input is empty, put a text instead as "Email" or "password"
                     Text(logInputName)
                         .foregroundColor(.gray)
                         .font(.urbanistSubHeadline())
                 }
-                if logLabel.lowercased().contains ("password") {
+                if logLabel.lowercased().contains ("password") { //if email, it's text field else its secyrefield and show dots
                     SecureField("", text: $logInput )
                         .foregroundColor(.white)
                 } else {
@@ -44,10 +46,9 @@ struct LogInputView: View {
     .frame(height: 48.0)
     .background(Color.cinematePurpleDark)
     .cornerRadius(8.0)
-    // border n'arrondissait pas ses angles donc autr moyen
     .overlay(
-        RoundedRectangle(cornerRadius: 8.0) // Utilise le même rayon de coin que pour le fond
-            .stroke( wrongLogInput ? Color.red : Color.cinemateGrayDark, lineWidth: 1) // Bordure colorée et arrondie
+        RoundedRectangle(cornerRadius: 8.0)
+            .stroke( wrongLogInput ? Color.red : Color.cinemateGrayDark, lineWidth: 1) // border line change color to red if input is wrong
     )
     .foregroundColor(Color.cinemateGrayLight)
     .imageScale(.large)
