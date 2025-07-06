@@ -2,12 +2,14 @@
 //  TabBarView.swift
 //  Cinemates
 //
-//  Created by apprenant98 on 30/01/2025.
+//  Created by apprenant?? on 30/01/2025.
+//Modified by Carine ESPEJO at line 12-13 and 119-121
 //
 
 import SwiftUI
 
 struct TabBarView: View {
+    // var to toggle login pageview
     @State var LoggedIn = true
     @State var selectedIndex = 0
     
@@ -114,6 +116,7 @@ struct TabBarView: View {
                 
                 
             }
+            // show login Pageview at the beginning
             .fullScreenCover(isPresented: $LoggedIn) {
                 LoginView(showingLoginScreen: $LoggedIn)
             }
