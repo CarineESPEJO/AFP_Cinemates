@@ -2,33 +2,38 @@
 //  FilmDataBase.swift
 //  Cinemates
 //
-//  Created by apprenant98 on 30/01/2025.
+//  Created by Carine ESPEJO on 30/01/2025.
 //
 
+//Its an app POC made by beginners, the teachers couldn't teach us everything to make to work the database
+//As beginners, we didn't use APIs so everything is somewhere in the folders
 import Foundation
 import DeveloperToolsSupport
 
 struct Film : Identifiable {
-    
+    // automatic ID
     var id = UUID()
     
     //infos
-    
     var filmName: String
     var filmPoster : ImageResource
     
-    
     var filmDate : String
     var filmGenres : [String]
-    
+
+    // here we went with the idea that if there was an APIS, we would receivre the total minutes of the movie
     var filmDurationMinutes : Int
+    // var to transform the duration from minutes to hours and minutes
     var filmDurationHours : String {
         var durationHours : Int = 0
         var durationMinutes : Int = 0
         
+        // take the minutes and divide them by (mn per hour)
         durationHours = filmDurationMinutes / 60
+        // give the rest as minutes
         durationMinutes = filmDurationMinutes % 60
-        
+
+        // to clean the display by adding 0 to have everytime xxhyy and not xxh or xxhy
         if durationMinutes == 0 {
             return ("\(durationHours)h00")
         } else if durationMinutes < 10 {
@@ -37,24 +42,24 @@ struct Film : Identifiable {
             return ("\(durationHours)h\(durationMinutes)")
         }
     }
-    
+
+    //Notes from other platforms 
     var filmAlloCineRating : Double
-    var filmCinematesRating : Double  // à changer
-    var filmFriendsRating : Double    // à changer
+    var filmCinematesRating : Double  
+    var filmFriendsRating : Double    
     
     
     var filmPlatforms : [String:ImageResource]
     var filmDescription : String
     var filmCasting : [String:ImageResource]
+    // to put a trailer on the movie description page
     var filmTrailer : URL
     
     var filmNotes : [Notation] = []
-    
-    
-    
 }
 
 
+// data base of movies
 
 var avatarWayOfWater = Film(
     filmName: "Avatar: La Voie de l’Eau",
