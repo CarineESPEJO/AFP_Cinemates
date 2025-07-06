@@ -13,7 +13,7 @@ import DeveloperToolsSupport
 struct UserFilm: Identifiable {
     var id = UUID()
 
-    //goes search the object movie from Film.swift
+    //go search the object movie from Film.swift
     var filmsSeen: [Film]
     var filmsToSee: [Film]
     var filmsFavorites: [Film]
