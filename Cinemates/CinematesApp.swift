@@ -2,11 +2,12 @@
 //  CinematesApp.swift
 //  Cinemates
 //
-//  Created by apprenant98 on 30/01/2025.
+//  Created by Carine ESPEJO on 30/01/2025.
 //
 
 import SwiftUI
 
+// put TabBarView as mainView to arrive
 @main
 struct CinematesApp: App {
     var body: some Scene {
