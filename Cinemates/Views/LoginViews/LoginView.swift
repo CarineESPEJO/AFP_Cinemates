@@ -1,5 +1,5 @@
 //
-//  LogInputView.swift
+//  LoginView.swift
 //  Cinemates
 //
 //  Created by Carine ESPEJO on 30/01/2025.
