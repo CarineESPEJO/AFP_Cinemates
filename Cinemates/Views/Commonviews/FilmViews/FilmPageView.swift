@@ -1,3 +1,11 @@
+//
+//  FilmInfoView.swift
+//  Cinemates
+//
+//  Created by apprenant?? on 05/02/2025.
+// Parts added by Carine ESPEJO at line 154 and more
+//
+
 import SwiftUI
 
 struct FilmPageView: View {
@@ -143,6 +151,7 @@ struct FilmPageView: View {
                                     Spacer ()
                                 }
                             }
+                            // I added this part of code to call the trailer of the movie on its description page
                             VStack (alignment: .leading) {
                                 Text("Bande-annonce")
                                     .foregroundStyle(.cinemateWhite)
