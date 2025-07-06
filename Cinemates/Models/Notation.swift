@@ -1,5 +1,5 @@
 //
-//  NotationView.swift
+//  Notation.swift
 //  Cinemates
 //
 //  Created by Carine ESPEJO on 30/01/2025.
@@ -27,7 +27,7 @@ struct Notation: Identifiable {
         (scenarioNote + visualNote + musicNote) / 3
     }
     
-    var comment: String   // <= note to ourselves: limit of 500 caracteres
+    var comment: String   // note to ourselves: limit of 500 caracteres
 }
 
 // Generate UUID for the users
