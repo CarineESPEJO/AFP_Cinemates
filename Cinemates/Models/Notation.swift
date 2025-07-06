@@ -2,27 +2,34 @@
 //  NotationView.swift
 //  Cinemates
 //
-//  Created by apprenant98 on 30/01/2025.
+//  Created by Carine ESPEJO on 30/01/2025.
 //
+
+// as an app POC of beginner level, the notation tool is not linked to this database
 import Foundation
 
-// Structure Notation
+// Structure of Notation
 struct Notation: Identifiable {
+    // an automatic ID
     var id = UUID()
-    
+
+    // link to a user by their own ID
     var userId: UUID
+
+    //notes for each parts
     var scenarioNote: Double
     var visualNote: Double
     var musicNote: Double
-    
+
+    // generalNote by the average of the 3 before
     var generalNote: Double {
         (scenarioNote + visualNote + musicNote) / 3
     }
     
-    var comment: String   // <= 500 caractères
+    var comment: String   // <= note to ourselves: limit of 500 caracteres
 }
 
-// Générer des UUID pour les utilisateurs
+// Generate UUID for the users
 let user1Id = UUID()
 let user2Id = UUID()
 let user3Id = UUID()
