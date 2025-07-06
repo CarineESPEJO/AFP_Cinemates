@@ -3,6 +3,7 @@
 //  Cinemates
 //
 //  Created by apprenant91 on 05/02/2025.
+// Parts added by Carine ESPEJO from line 50 to line 82
 //
 
 
@@ -46,7 +47,8 @@ struct ToggleNotationFilmView: View {
             .foregroundColor(.cinemateWhite)
             //                            .padding(.horizontal, 7)
             
-            
+            // Here it verify if there is already a note, if not, it shows a button "Noter"
+            //it puts the rating page in front of the page description view
             if ownNoteNotClicked {
                 Button("Noter") {
                     ownNoteNotClicked = false
@@ -72,9 +74,9 @@ struct ToggleNotationFilmView: View {
                 .background(Capsule().fill(Color.cinemateGrayBubble).opacity(0.4))
                 .overlay(Capsule().strokeBorder(Color.cinemateGrayDark.opacity(0.6), lineWidth: 2))
                 .foregroundColor(.cinemateWhite)
+                //show the rating page by toggling with isPresented
                 .sheet(isPresented: $ratingModal) {
-                    // Spécifiez la vue que vous voulez afficher dans la feuille
-                    FilmRatingView(filmNoted: FilmP, generalNote: $ownNote) // Vous pouvez aussi passer `FilmP` si nécessaire
+                    FilmRatingView(filmNoted: FilmP, generalNote: $ownNote)
                 }
             }
             
