@@ -10,7 +10,7 @@ import SwiftUI
 //function rating film pageview
 // As an app POC made by beginners, the teachers doesn't let us make it fonctionnable, the note is not put into the database, just return as a var of the pageview
 struct FilmRatingView: View {
-    var filmNoted: Film
+    var filmNoted: Film = theMatrix
     @State var scenarioRating = 5
     @State var visualRating = 5
     @State var musicRating = 5
