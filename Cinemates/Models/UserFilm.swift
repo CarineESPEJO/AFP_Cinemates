@@ -2,18 +2,17 @@
 //  Untitled.swift
 //  Cinemates
 //
-//  Created by apprenant98 on 30/01/2025.
+//  Created by Carine ESPEJO on 30/01/2025.
 //
 
-//Base de données de la liste de films des users (entière, vus, à voir, favoris)
-
-
+//Database of the movies list of the users(al:, seen, to see, favorite)
 import Foundation
 import DeveloperToolsSupport
 
 struct UserFilm: Identifiable {
     var id = UUID()
-    
+
+    //goes search the object movie from Film.swift
     var filmsSeen: [Film]
     var filmsToSee: [Film]
     var filmsFavorites: [Film]
@@ -21,6 +20,7 @@ struct UserFilm: Identifiable {
    
 }
 
+//database of movies list of users
 var veuveNoireFilms = UserFilm(
     filmsSeen: [theBatman,
                 theDarkKnight,
