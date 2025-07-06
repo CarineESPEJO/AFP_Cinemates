@@ -7,21 +7,26 @@
 
 import SwiftUI
 
-
+// It's an app POC, not all functionalities are fully developped or like it would have been in the real app (ex: use the criterias to choose the movies with in the lists activated)
 
 struct RandomizerView: View {
     //criteria page toggle var
     @State private var critereModal : Bool = false
-    
+
+    //var toggled each 0.5s to create circle bounce effect
     @State private var isBouncing = false
+    //hide circle agfter first click on it
     @State private var firstclick: Bool = true
     
-    
+    // var randomizer list
     @State var randomizerTotalList : [Film] = filmsDatabase
+
+   // variables to activates/desactivates this list in randomizer
     @State private var myListButton : Bool = false
     @State private var friendsButton : Bool = false
     @State private var communityButton  : Bool = false
-    
+
+    //film randomized, neeeded to have something at the beginning to work
     @State var filmRandomized : Film = theMatrix
     
     var friendsList: [Film] {
@@ -48,68 +53,72 @@ struct RandomizerView: View {
     
     var body: some View {
         ZStack {
-            Color.cinemateBlack
+            Color.cinemateBlack //background color
                 .ignoresSafeArea(edges: .all)
             VStack  (spacing : 20){
                 
                 headView(criteresModal: $critereModal)
                 
-                
-                HStack (spacing : 12) {
-                    
+                //lists to be chosen
+                //we didn't have time but we wanted that if we press during a certain time the buttons, we can choose which profil/group is activated in that button
+                HStack (spacing : 12) { 
+                    // disable estetiques all the of the  other buttons and link the randomizer list to the list of all the movies
                     Button("Tous") {
                         myListButton = false
                         friendsButton = false
                         communityButton = false
                         randomizerTotalList = filmsDatabase
                     }
-                    
+                    // if one or more of the other buttons are activated, this one is disactivated so its style change
                     .foregroundStyle(myListButton == false && friendsButton == false && communityButton == false ? Color.cinemateWhite : Color.cinemateGrayLight )
                     .font(.urbanistHeadline())
-                    .padding(.horizontal, 12)   // Ajoute un padding horizontal de 4 (gauche et droite)
+                    .padding(.horizontal, 12) 
                     .padding(.vertical, 4)
+                    //same
                     .background(myListButton == false && friendsButton == false && communityButton == false ? Color.cinematePurpleLight : Color.clear )
                     .cornerRadius(20)
                     .overlay(
-                        RoundedRectangle(cornerRadius: 20) // Ici, tu définis le rayon des coins
-                            .stroke(Color.cinemateGrayDark, lineWidth: 1)) // Bordure blanche de 4 points de large
+                        RoundedRectangle(cornerRadius: 20) 
+                            .stroke(Color.cinemateGrayDark, lineWidth: 1))
                     
-                    
-                    
+                    //function to create one of the 3 other buttons
                     ListsButtonCellView(randomizerTotalList: $randomizerTotalList, listButton: $myListButton, otherListButtonOne: $friendsButton, otherListButtonTwo: $communityButton,buttonName: "Ma liste", buttonAction: veuveNoireFilms.filmsToSee, otherButtonOneAction: friendsList, otherButtonTwoAction: communityList)
                     
+                    //same
                     ListsButtonCellView(randomizerTotalList: $randomizerTotalList, listButton: $friendsButton,otherListButtonOne: $myListButton, otherListButtonTwo: $communityButton,buttonName: "Amis", buttonAction: friendsList,otherButtonOneAction: veuveNoireFilms.filmsToSee, otherButtonTwoAction: communityList)
-                    
+
+                     //same
                     ListsButtonCellView(randomizerTotalList: $randomizerTotalList, listButton: $communityButton,otherListButtonOne: $myListButton, otherListButtonTwo: $friendsButton, buttonName: "Communauté",buttonAction: communityList,otherButtonOneAction: veuveNoireFilms.filmsToSee, otherButtonTwoAction: friendsList)
                 }
                 
                 VStack(spacing :  20) {
                     ZStack {
-                        
-                        
+
+                        //view to create the circle wave effect
                         CirclesWaveAnimationView()
                         
-                        Button {
+                        Button {  //button to start randomizer, is hidden after to let the space to the movie randomized and the other buttons
                             withAnimation {
                                 firstclick = false
                             }
                         } label : {
                             ZStack {
-                                
-                                
                                 Circle()
                                     .fill(Color.cinematePurpleLight)
                                     .frame(width: 120)
                                     .shadow(color: .cinematePurpleLight, radius: 75)
-                                    .scaleEffect(isBouncing ? 1.2 : 1)
+                                    //when isBouncing activated, the cicrle is 1.2, when not its 1 to crate bounce effect
+                                    .scaleEffect(isBouncing ? 1.2 : 1) 
                                 Text("Commencer")
                             }
+                            //each 0.5s, toggle isBouncing to create the animation of bounce 
                             .animation(
-                                .easeInOut(duration: 0.5).repeatForever(autoreverses: true), // Animation avec rebond
+                                .easeInOut(duration: 0.5).repeatForever(autoreverses: true), 
                                 value: isBouncing
                             )
+                            // start the animation when we arrive on the page
                             .onAppear {
-                                isBouncing.toggle() // Démarre l'animation lorsque la vue apparaît
+                                isBouncing.toggle() 
                             }
                             
                         }
@@ -117,19 +126,19 @@ struct RandomizerView: View {
                         .font(.staatlichesTitle3())
                         
                         
-                        if firstclick == false {
+                        if firstclick == false { //after 1st click show film randomized
                             VStack {
-                                RandomizedFilm(filmRandomized: filmRandomized)
+                                RandomizedFilm(filmRandomized: filmRandomized) //function to randomize a film
                                 
                                 HStack (spacing : 36){
+                                    //function to delete movie from randomizer list and add it to the historique
                                     buttonLeft(buttonLeftSymbol: "xmark", randomizerTotalList : $randomizerTotalList, filmRandomized: $filmRandomized, historicList: $historicList)
                                     
-                                    
+                                     //randomize nesw film
                                     buttonMiddle(randomizerTotalList: $randomizerTotalList, filmRandomized: $filmRandomized, historicList: $historicList)
                                     
-                                    
+                                    //fake button, to add the randomized film to our own list
                                     buttonRight(buttonRightTapped : $buttonRightTapped, buttonRightSymbolUnchecked: "eye", buttonRightSymbolChecked: "checkmark")
-                                    
                                 }
                                 .padding(.bottom)
                                 
@@ -144,12 +153,12 @@ struct RandomizerView: View {
                             
                         }
                     }
-                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 2)
+                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 2) //to be half of the screen sze
                     .padding(.top, 50)
                     
                     
                     Button(action: {
-                        historicButton.toggle() // Déclenche l'ouverture de la feuille
+                        historicButton.toggle() // Toggle to show the history page
                     }) {
                         HStack {
                             Text("Voir l'historique")
@@ -161,6 +170,7 @@ struct RandomizerView: View {
                         .cornerRadius(20)
                         .padding(.vertical, 20)
                     }
+                    //Show the history page
                     .sheet(isPresented: $historicButton) {
                         // Spécifiez la vue que vous voulez afficher dans la feuille
                         RandomizerHistoricListView(listShowing: historicList)
@@ -319,28 +329,29 @@ struct buttonMiddle: View {
 }
 
 struct headView: View {
+    // link for the criteria menu to be on/off
     @Binding var criteresModal: Bool
     var body: some View {
         HStack {
-            Image(systemName: "slider.horizontal.3")
+            Image(systemName: "slider.horizontal.3") // invisible critria menu icon disabled to center the "randomizer" title
                 .foregroundStyle(.cinemateBlack)
                 .font(.system(size: 16))
                 .padding(12)
                 .overlay(
                     RoundedRectangle(cornerRadius: 8)
-                        .stroke(Color.cinemateBlack, lineWidth: 1)
+                        .stroke(Color.cinemateBlack, lineWidth: 1) // border line
                 )
                 .padding(.horizontal)
                 .padding(.vertical, 4)
             Spacer ()
-            Text("Randomizer")
+            Text("Randomizer")  // title
                 .font(.staatlichesLargeTitle())
                 .foregroundColor(.white)
                 .padding(.bottom, 10)
             
             Spacer()
-            Button(action: {
-                criteresModal.toggle() // Déclenche l'ouverture de la feuille
+            Button(action: { //Real button to open the criteria page
+                criteresModal.toggle() 
             }) {
                 Image(systemName: "slider.horizontal.3")
                     .foregroundStyle(.cinemateGrayLight)
