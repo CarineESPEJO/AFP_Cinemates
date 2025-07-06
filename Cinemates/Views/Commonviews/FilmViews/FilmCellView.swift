@@ -1,6 +1,6 @@
 
 //
-//  MovieCellView.swift
+//  FilmCellView.swift
 //  Cinemates
 //
 //  Created by Carine ESPEJO on 30/01/2025.
