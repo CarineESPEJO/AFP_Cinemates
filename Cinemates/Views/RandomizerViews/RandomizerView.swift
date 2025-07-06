@@ -28,7 +28,8 @@ struct RandomizerView: View {
 
     //film randomized, neeeded to have something at the beginning to work
     @State var filmRandomized : Film = theMatrix
-    
+
+    // var which take alll the films from the list of the friends of VeuveNoire, didn't have time to make it that there is no duplicate
     var friendsList: [Film] {
         var allFriendsFilms: [Film] = []
         for friend in veuveNoire.userFriends {
@@ -37,7 +38,7 @@ struct RandomizerView: View {
         return allFriendsFilms
     }
     
-    
+    //same but with the communities
     var communityList: [Film] {
         var allCommunityFilms: [Film] = []
         for communityMember in communityOneDatabase {
@@ -45,10 +46,13 @@ struct RandomizerView: View {
         }
         return allCommunityFilms
     }
-    
+
+    // historic List with some film already inside for presentation to go faster
     @State private var historicList : [Film] = [theGodfather,theDarkKnight, theShawshankRedemption, titanic]
-    @State private var historicButton : Bool = false
+    //Show/Hide historic page
+    @State private var historicButton : Bool = fals
     @State private var scrollToBottom: Bool = false
+    // fake button, toggle its aspect
     @State private var buttonRightTapped : String = "Add"
     
     var body: some View {
@@ -186,29 +190,27 @@ struct RandomizerView: View {
             }
         }
         .onAppear {
-            // Initialiser filmRandomized lorsque la vue est chargée
+            // Initialize filmRandomized when view is loaded
             filmRandomized = randomizerTotalList.randomElement()! }
     }
     
 }
 
-
-
-
-
-
-
-
+//Animation of circle waves in the background
 struct CirclesWaveAnimationView: View {
     @State private var scale: CGFloat = 0
-    @State private var circles = Array(repeating: 0.0, count: 5) // Crée 5 cercles
-    @State private var opacities = Array(repeating: 1.0, count: 5) // Opacité pour chaque cercle
-    
+    @State private var circles = Array(repeating: 0.0, count: 5) // Create a size for each the 5 circles
+    @State private var opacities = Array(repeating: 1.0, count: 5) // Same with opacity
+
+    //Duration of the animation for each circle
     let duration: Double = 2.0
+    //number of cirles
     let circleCount = 5
+    //limit of size
     let maxScale: CGFloat = 3.0
     
     var body: some View {
+        // Loops through 0 to 4 (5 circles), with each index uniquely identified using \.self
         ForEach(0..<circleCount, id: \.self) { index in
             Circle()
                 .fill(Color.clear)
@@ -216,19 +218,19 @@ struct CirclesWaveAnimationView: View {
                     Circle()
                         .stroke(Color.cinematePurpleLight, lineWidth: 1)
                 )
-                .scaleEffect(self.circles[index])
-                .opacity(self.opacities[index])
-                .frame(width: 150, height: 150)
+                .scaleEffect(self.circles[index]) //Applies a scaling transformation to the circle using its current scale from the circles array
+                .opacity(self.opacities[index]) //Same with opacities arrray
+                .frame(width: 150, height: 150) //Sets the size of each circle's frame to 150x150 points.
             
                 .onAppear {
                     // Redémarre l'animation dès qu'un cercle apparaît
                     withAnimation(
                         Animation.easeOut(duration: self.duration)
-                            .delay(Double(index) * 0.5) // Délai entre chaque cercle
-                            .repeatForever(autoreverses: false)
+                            .delay(Double(index) * 0.5) // Delai between each circle
+                            .repeatForever(autoreverses: false) //Does not reverse
                     ) {
-                        self.circles[index] = self.maxScale // Agrandissement des cercles
-                        self.opacities[index] = 0.2 // Diminution de l'opacité
+                        self.circles[index] = self.maxScale // Updates the circle’s scale to the maxScale (making it grow)
+                        self.opacities[index] = 0.2 // Same but with opacity to fade out
                     }
                 }
         }
