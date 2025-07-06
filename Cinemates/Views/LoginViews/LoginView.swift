@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct LoginView: View {
-    // Ici j'ai essayé de rendre le login responsive.
-    //  Cette ligne permet de récupérer la catégorie de taille d'accessibilité (gros texte, texte normal, etc.) pour la taille du logo et le scrollview
+    // Here I tried to do a responsive login page
+    //  This line help to recover the categories of accessibility sizes to create a responsive size for the logo and the scrollview
     @Environment(\.sizeCategory) var sizeCategory
     
-    // Ici on vérifie si l'utilisateur entre un mauvais email ou mot de passe et si oui on lui retourne un message personnalisé
-    // (étant un POF, ce nes sont que des variables sur cette page et non relié à la database)
+    // Here we check if the user inputs are wrong and which to give a personnalized errror text
+    // (being a POC app, the good responses are just variables on this page and are not linked to the database)
     private var textWrong: String {
-        // si var textWrong est true alors on retourne le message suivant
+        // if var textWrong is true then we return this message
         if wrongEmail {
             return "Mauvais email"
         } else if wrongPassword {
@@ -26,87 +26,87 @@ struct LoginView: View {
     }
     
     
-    // Voici les variables pour la page de login
-    @State private var email: String = "" // écriture du mail par l'utilisateur
-    @State private var password: String = "" // écriture du mot de passe par l'utilisateur
+    // Here the variables for the login page
+    @State private var email: String = "" // input of the mail by the user
+    @State private var password: String = "" // éinput of the password by the user
     
-    @State private var wrongEmail: Bool = false // variable pour vérifier si c'est le bon mail
-    @State private var wrongPassword: Bool = false // variable pour vérifier si c'est le bon mot de passe
-    @Binding var showingLoginScreen: Bool // variable pour passer à la page suivante
-    @State private var username: String = "" // affichage du pseudo relié au compte
+    @State private var wrongEmail: Bool = false // variable to check if it's the wrong email to use for error text
+    @State private var wrongPassword: Bool = false // variable to check if it's the wrong password to use for error text
+    @Binding var showingLoginScreen: Bool // variable to show or disable the login screen and go to the next page
+    @State private var username: String = "" // give the pseudo of the account (false for POC, not linked to database)
 
     
     var body: some View {
-        ZStack { //Pour que l'image de fond soit dserrière le reste
+        ZStack { // To have the background image behind everything
             Image(.bgLogin)
-                .resizable(resizingMode: .stretch) // pour que l'image de fond fonctionne
-                .aspectRatio(contentMode: .fill) // pour que l'image de fond soit partout
-                .ignoresSafeArea() // pour que l'image n'est pas de margin l'empêchant d'être partout
+                .resizable(resizingMode: .stretch) // To have the background image to work
+                .aspectRatio(contentMode: .fill) // To have the background image  everywhere
+                .ignoresSafeArea() // To have the background image without margin
             
-            VStack { // les reste de la page
-                Spacer() // Espacement pour éviter que le logo touche le haut
+            VStack { // the rest of the page
+                Spacer() // Space to avoid that the logo is all the way at the top
                 
-                VStack { // Pour grouper la partie titre (logo, titre, catch phrase)
-                    Spacer() // pour centrer les elements front de la page
+                VStack { // To grous the title parts (logo, title, catch phrase)
+                    Spacer() // To centrer the elements
                     
                     Image(.logo)
-                        .resizable() // permet de changer la taille de l'image
-                        .scaledToFill() // Approche pour remplir tout en maintenant l'aspect
-                        .frame(width: getLogoSize(), height: getLogoSize()) // va chercher la function pour que selon la taille d'accessibilté choisi, le logo s'adapte niveau taille
-                        .clipped() // Assure que l'image ne dépasse pas du cadre
-                        .cornerRadius(8.0) //bords arrondis
-                        .shadow(color: .cinematePurpleMid, radius: 20, x: 0, y: 0) // ombre de 20px placé pile au milieu de l'element dont il découle
+                        .resizable() // To resize the image
+                        .scaledToFill() // Way to fill while maintaining the aspect
+                        .frame(width: getLogoSize(), height: getLogoSize()) // Go searching the function to resize logo according to the accessibility sizes
+                        .clipped() // Ensures the image does not extend beyond the frame
+                        .cornerRadius(8.0) //rounded corners
+                        .shadow(color: .cinematePurpleMid, radius: 20, x: 0, y: 0) // shadow of 20px placed at the center of the element it's linked
                     
-                    Text("Cinémates") // nom de l'appli
-                        .font(Font.TeachersLargeTitle()) // utilise une font personnalisé (cf : FontExtensions.swift)
+                    Text("Cinémates") // app name
+                        .font(Font.TeachersLargeTitle()) // use a personnalised font  (cf : FontExtensions.swift)
                         .fontWeight(.medium)
                     
-                    Text("A la recherche du film parfait.") // catch phrase de l'appli
-                        .font(Font.urbanistHeadline()) // utilise une font personnalisé (cf : FontExtensions.swift)
+                    Text("A la recherche du film parfait.") // app catch phrase
+                        .font(Font.urbanistHeadline()) // use a personnalised fon (cf : FontExtensions.swift)
                         .fontWeight(.regular)
                     
-                } // fin de la partie groupée titre
-                .foregroundColor(Color.white) // Titre & catch phrases sont blancs (au lie u de remmtre même ligne à chacun, on le met sur leur parent groupe)
-                .multilineTextAlignment(.center) // Si le texte grossit et à cause de ça doit revenir à la ligne, il reste quand même centré
+                } // End of the grouped title part
+                .foregroundColor(Color.white) // Title and catch phrase are whites(instead of same line on each, only one their parent group)
+                .multilineTextAlignment(.center) // If the text is enlarged and et returns to the line, it still remains centered
                 .padding(.vertical, 32) 
                 
-                Spacer () // Espacement avant le formulaire
+                Spacer () //Space before the form
                 
-                VStack (spacing : 12){  // formulaire de connexion, avec un espacement de 12px entre chaque enfant
-                    VStack {  //Regroupement du titre connexion et du message d'erreur pout un placement plus propre
+                VStack (spacing : 12){  // login form, with a space of 12px between each children
+                    VStack {  //Group the login title and the error message to have a more clean placement
                         Text("Connexion")
-                            .font(Font.staatlichesTitle2()) // utilise une autre font personnalisé (cf : FontExtensions.swift)
+                            .font(Font.staatlichesTitle2()) // use an another personnalized font (cf : FontExtensions.swift)
                             .foregroundColor(Color.white)
-                            .frame( height: 25.0) // Donne une taille de cadre spécifique pour ce texte
+                            .frame( height: 25.0) // Give a specific size to the frame of the text
                         
-                        // Erreur si mauvais email ou mot de passe
+                        // Show the error message
                         Text(textWrong)
                             .font(.urbanistHeadline())
                             .foregroundColor(Color.red)
-                            .multilineTextAlignment(.center) // si le message prend plus d'une ligne (par ex si changement de taille d'accessibilité), le texte s'aligne au milieu
+                            .multilineTextAlignment(.center) // If the message is more tha n one line(ex if changement in accessibility size), the text aligns in the middle
                     }
                     
-                    VStack (spacing : 16) { // regroupe les inputsViews et le boutton d'envoie
-                        Group { // regroupe les inputsViews email et mot de passe
+                    VStack (spacing : 16) { // group the inputsViews et the login button
+                        Group { // group the inputsViews of email et password
                             LogInputView(logInput: $email, wrongLogInput: $wrongEmail,
-                                         logLabel: "Email" , logSymbol: "envelope", logInputName : "Email" ) // appel le code se trouvant dans LogInputView.swift
+                                         logLabel: "Email" , logSymbol: "envelope", logInputName : "Email" ) // call the functione in LogInputView.swift
                             
                             
-                            LogInputView(logInput: $password, wrongLogInput: $wrongPassword, logLabel: "password" , logSymbol: "lock"  , logInputName : "Mot de passe" ) // same mais avec des variables différentes
+                            LogInputView(logInput: $password, wrongLogInput: $wrongPassword, logLabel: "password" , logSymbol: "lock"  , logInputName : "Mot de passe" ) // same but with differents variables as inputs
                         }
                         
                         
-                        Button("Mot de passe oublié ?") { //faux bouton 
+                        Button("Mot de passe oublié ?") { //fake bouton 
                             
                         }
                         .foregroundColor(.white)
                         
                         Button {
-                            authenticateUser(email: email, password: password) // appel fonction authenticateUser pour vérifier si l'email et le mot de passe sont justes
+                            authenticateUser(email: email, password: password) // call the function authenticateUser to verify if email et password are wrights
 
                         } label: {
                             HStack {
-                                Spacer() // pour mettre bien le texte au milieu
+                                Spacer() // To put the text at the middle
                                 Text("Se connecter")
                                     .font(.staatlichesHeadline())
                                 Spacer()
@@ -118,7 +118,7 @@ struct LoginView: View {
                         .cornerRadius(8.0)
                         
                         
-                        HStack { // separateur entre connexion normal et par un element extérieur
+                        HStack { // separator between normal login and by an exterior element (as Google login)
                             Rectangle()
                                 .foregroundColor(.cinemateWhite)
                                 .frame(height: 1)
@@ -136,10 +136,9 @@ struct LoginView: View {
                         }
                         .padding()
                         
-                        HStack { // group des 3 element extérieurs pour se connecter
-                             // Vu que ce seont des faux boutons, ils sont utilisés pour se connecter rapidement pour les présentations sans passer par le test email et mdp
-                            Button { // donne directement le pseudo et passe directement à la page suivante
-                                username = "VeuveNoire"
+                        HStack { // group the 2 exterior login elements
+                             // As fake buttons, they are used to log in a fast way for presentations without going through the text of the mail and password
+                            Button { // Give directly the username and desactivate the showing of the login page
                                 showingLoginScreen = false
                             } label: {
                                 HStack {
@@ -161,14 +160,14 @@ struct LoginView: View {
                                 .foregroundColor(.white)
                                 .background(Color.cinematePurpleDark)
                                 .cornerRadius(8.0)
-                                .overlay(  //Permet de créer une bordure en mettant un rectangle invisible au dessus
-                                    RoundedRectangle(cornerRadius: 8.0) // Utilise le même rayon de coin que pour le fond
-                                        .stroke(.cinemateGrayDark, lineWidth: 1) // Permet de créer une bordure colorée et arrondie
+                                .overlay(  //To create a border by using a invisible rectangle put in front of button
+                                    RoundedRectangle(cornerRadius: 8.0) // 
+                                        .stroke(.cinemateGrayDark, lineWidth: 1) //  To create a colored and rounded border
                                 )
                                 .padding(.trailing, 8) 
                             }
                             
-                            Button { // same pour ce bouton
+                            Button { // same for this button
                                 username = "VeuveNoire"
                                 showingLoginScreen = false
                             } label: {
@@ -200,7 +199,7 @@ struct LoginView: View {
                         }
                         
                         
-                        Button("Créer un compte") { // nouvelle fois, un faux bouton
+                        Button("Créer un compte") { // also a fake button
                             
                         }
                         .padding(.vertical)
@@ -210,20 +209,20 @@ struct LoginView: View {
                 .font(Font.urbanistSubHeadline())
                 .padding(.vertical)
                 
-            } // Fin du VStack comprenand tout sauf l'image de fond
-            .foregroundColor(.cinemateWhite) // presque tout les textes sont en blanc
-            .fontWeight(.regular) // presque tout les textes sont en regular
-            .padding(.horizontal) // pour que tout les éléments (sauf le background) ne touche pas les côtés
-            .padding(.bottom, 20) // Ajouter un peu d'espace en bas pour éviter que le contenu touche le bord
-            .frame(maxHeight: .infinity) // Permet de ne pas faire déborder le contenu à l'écran
+            } // End of the VStack containing everything but the background image
+            .foregroundColor(.cinemateWhite) // almost all texts are in white
+            .fontWeight(.regular) // almost all texts are in white regular
+            .padding(.horizontal) /// almost all elements (but the background) don't touch the sides
+            .padding(.bottom, 20) // Add some space at the bottom to prevent content from touching the edges
+            .frame(maxHeight: .infinity) // Allows the content not to overflow on the screen
         }
     }
         
-        func getLogoSize() -> CGFloat { // fonction qui selon la taille d'accessibilité choisi agrandit ou rétrécie le logo
-            let baseSize: CGFloat = 66 // Taille par défaut pour le logo
+        func getLogoSize() -> CGFloat { // function which, depending on the accessibility size chosen, enlarges or shrinks the logo
+            let baseSize: CGFloat = 66 // default size of the logo
             switch sizeCategory {
-            case .extraSmall ,.small: //tailles d'accessibilités
-                return baseSize * 0.75 //taille de base du logo rétrécie ou agrandit par multiplication
+            case .extraSmall ,.small: //accessibility sizes
+                return baseSize * 0.75 //default size of the logo enlarged or shrinked by multiplication
             case .medium, .large, .extraLarge :
                 return baseSize * 1.0
             case .extraExtraLarge, .extraExtraExtraLarge:
@@ -237,16 +236,16 @@ struct LoginView: View {
             }
         }
 
-    // fonction qui vérifie si l'email et le mot de passe sont vrai ou faux
+        // function to  vérify if the email and password are wright or wrong
         func authenticateUser(email: String, password: String) { 
-            //si équivalent les 2 alors on donne le username et la page ne s'affiche plus pour passer à la prochaine page 
+            //if the 2 are both equivalents then it give the username and disable the login page to go to the next page
             if email.lowercased() == "admin@example.com" {
                 wrongEmail = false
                 if password == "123abc" {
                     wrongPassword = false
                     username = "VeuveNoire"
                     showingLoginScreen = false
-                // si faux change ces variables pour être envoyé à LogInputView.swift qui va adapter textWrong en circonstance (email à priorité sur textrong pour corriger dans l'ordre)
+                // if not, it change this variables to be  to be sent to LogInputView.swift which will adapt textWrong to circumstances (email have priority on textrong)
                 } else {
                     wrongPassword = true
                 }
@@ -256,7 +255,7 @@ struct LoginView: View {
         }
 }
 
-    // partie abandonné par manque de temps, était pour éviter des doublons entre les boutons element extérieurs
+    // part abandoned due to lack of time, was to avoid duplicates on the exterior element buttons
     struct LogExteriorView: View {
         @Binding var username : String
         @Binding var showingLoginScreen : Bool
