@@ -1,3 +1,10 @@
+//
+//  FilmRatingView.swift
+//  Cinemates
+//
+//  Created by Carine ESPEJO on 30/01/2025.
+//
+
 import SwiftUI
 
 struct FilmRatingView: View {
