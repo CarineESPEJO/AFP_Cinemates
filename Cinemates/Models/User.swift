@@ -4,7 +4,7 @@
 //
 //  Created by Carine ESPEJO on 30/01/2025.
 //
-//Its an app POC made by beginners, the teachers couldn't teach us everything to make to work the database
+//Its an app POC made by beginners, the teachers couldn't teach us everything in less than 2 weeks how to have a clean and working database
 
 import Foundation
 import DeveloperToolsSupport
