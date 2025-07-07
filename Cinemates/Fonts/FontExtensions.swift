@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-// Create our own special fonts to call (to not be obligated to rewritte them all the time and have issues)
+// Create our own special fonts to call (to not be obligated to rewrite them all the time and have issues)
 extension Font {
     
     
