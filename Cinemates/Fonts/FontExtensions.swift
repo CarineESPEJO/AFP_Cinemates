@@ -13,7 +13,7 @@ extension Font {
     
     
     // Teachers
-    // Define a personnalized font size without UIKit
+    // Define a personnalized font size
     static func TeachersLargeTitle() -> Font {
         return .custom("Teachers-Regular", size: 44)
     }
@@ -29,7 +29,6 @@ extension Font {
     }
     
     static func staatlichesTitle3() -> Font {
-        // Définir une taille de police personnalisée sans UIKit
         return .custom("Staatliches-Regular", size: 20)
     }
     
