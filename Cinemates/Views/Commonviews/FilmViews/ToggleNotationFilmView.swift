@@ -52,7 +52,7 @@ struct ToggleNotationFilmView: View {
             if ownNoteNotClicked {
                 Button("Noter") {
                     ownNoteNotClicked = false
-                    ratingModal.toggle() // Déclenche l'ouverture de la feuille
+                    ratingModal.toggle() // Ativate/desactivate the showing of the rating page
                 }
                 .padding()
                 .frame(maxWidth: 100, maxHeight: 40)
@@ -61,8 +61,7 @@ struct ToggleNotationFilmView: View {
                 .overlay(Capsule().strokeBorder(Color.cinemateGrayDark.opacity(0.6), lineWidth: 2))
                 .foregroundColor(.cinemateWhite)
                 .sheet(isPresented: $ratingModal) {
-                    // Spécifiez la vue que vous voulez afficher dans la feuille
-                    FilmRatingView(filmNoted: FilmP, generalNote: $ownNote) // Vous pouvez aussi passer `FilmP` si nécessaire
+                    FilmRatingView(filmNoted: FilmP, generalNote: $ownNote) 
                 }
                 
             } else {
