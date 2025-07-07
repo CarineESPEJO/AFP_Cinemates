@@ -50,6 +50,7 @@ struct ListsButtonCellView: View {
                 } else if otherListButtonTwo == true {
                     randomizerTotalList.append(contentsOf: otherButtonTwoAction)
                 // if none of the 3 are activated, total button activated so we put its list in randomizedlist
+                // dont need a var to activate/desactivate the button because  its passif from the others (list added and aspect)
                 }else {
                     randomizerTotalList.append(contentsOf: filmsDatabase)
                 }
