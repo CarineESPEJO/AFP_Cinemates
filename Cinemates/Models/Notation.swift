@@ -5,7 +5,7 @@
 //  Created by Carine ESPEJO on 30/01/2025.
 //
 
-//Its an app POC made by beginners, the teachers couldn't teach us everything to make to work the database
+//Its an app POC made by beginners, the teachers couldn't teach us everything in less than 2 weeks how to have a clean and working database
 // as an app POC of beginner level, the notation tool is not linked to this database
 import Foundation
 
@@ -41,7 +41,7 @@ let user4Id = UUID()
 
 
 
-// Base de données des notations pour chaque film
+// Notation dtabase for each film
 
 // Inception
 var inceptionNotations = [
@@ -151,7 +151,6 @@ var titanicNotations = [
     )
 ]
 
-// Base de données des notations pour chaque film
 var filmsNotationsDatabase: [String: [Notation]] = [
     "Inception": inceptionNotations,
     "The Dark Knight": darkKnightNotations,
