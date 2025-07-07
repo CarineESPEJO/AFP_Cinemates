@@ -34,7 +34,7 @@ struct ListsButtonCellView: View {
                     //(because if neither o the 3 buttons are activated, its the total which is activated)
                     randomizerTotalList.removeAll()
                 }
-                //else it add the films of this list button to randomizer where there is already the ones of the othr activated buttons
+                //else it add the films of this list button to randomizer where there is already the ones of the other activated buttons
                 randomizerTotalList.append(contentsOf: buttonAction)
                 // the button is activated
                 listButton = true
@@ -50,7 +50,7 @@ struct ListsButtonCellView: View {
                 } else if otherListButtonTwo == true {
                     randomizerTotalList.append(contentsOf: otherButtonTwoAction)
                 // if none of the 3 are activated, total button activated so we put its list in randomizedlist
-                // dont need a var to activate/desactivate the button because  its passif from the others (list added and aspect)
+                // dont need a var to activate/desactivate the button because its passif from the others (list added and aspect)
                 }else {
                     randomizerTotalList.append(contentsOf: filmsDatabase)
                 }
@@ -62,7 +62,7 @@ struct ListsButtonCellView: View {
         }
         .foregroundStyle(listButton.self == false ? Color.cinemateGrayLight : Color.cinemateWhite)
         .font(.urbanistHeadline())
-        .padding(.horizontal, 12)   // Ajoute un padding horizontal de 4 (gauche et droite)
+        .padding(.horizontal, 12)  
         .padding(.vertical, 4)
         .background(listButton.self == false ? Color.clear : Color.cinematePurpleLight)
         .cornerRadius(20)
