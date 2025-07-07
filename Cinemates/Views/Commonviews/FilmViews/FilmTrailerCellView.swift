@@ -45,7 +45,7 @@ struct FilmTrailerCellView: View {
             // Charge the request into  WebView
             webView.load(request)
             
-            // Retourne an UIViewController with WebView
+            // Return an UIViewController with WebView
             let viewController = UIViewController()
             viewController.view = webView
             return viewController
@@ -56,7 +56,7 @@ struct FilmTrailerCellView: View {
             // nothing here because I didn't have time to go into more throughfully
         }
         
-        // funvction to extract the trailer ID  from the URL YouTube
+        // function to extract the trailer ID  from the URL YouTube
         private func extractVideoID(from urlString: String) -> String {
             guard let url = URL(string: urlString) else {
                 return ""
