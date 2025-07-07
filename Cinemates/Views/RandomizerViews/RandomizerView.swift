@@ -1,5 +1,5 @@
 //
-//  ListsButtonCellView.swift
+//  RandomizerView.swift
 //  Cinemates
 //
 //  Created by Carine ESPEJO on 02/02/2025.
