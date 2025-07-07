@@ -242,9 +242,11 @@ struct buttonLeft: View {
     @Binding var randomizerTotalList: [Film]
     @Binding var filmRandomized: Film
     @Binding var historicList: [Film]
-    var body: some View {
+    var body: some View { //fake button so just put it in historic and randomize film again
         Button(action: {
+              historicList.insert (filmRandomized, at: 0)
             filmRandomized = randomizerTotalList.randomElement()!
+            
         }) {
             Image(systemName: "\(buttonLeftSymbol)")
                 .foregroundStyle(.red)
@@ -265,7 +267,7 @@ struct buttonRight: View {
     var buttonRightSymbolChecked: String
     var body: some View {
         Button(action: {
-            // Action à effectuer lorsque le bouton est pressé
+            //change between add, To see, Seen
             if buttonRightTapped == "Add" {
                 buttonRightTapped = "ToSee"
             } else if buttonRightTapped == "ToSee" {
@@ -274,6 +276,7 @@ struct buttonRight: View {
                 buttonRightTapped = "Add"
             }
         }) {
+            //change icon according to the value
             if buttonRightTapped == "Add" {
                 Image(systemName: "plus")
                     .foregroundStyle(.cinemateGrayLight)
@@ -311,6 +314,7 @@ struct buttonMiddle: View {
     @Binding var randomizerTotalList: [Film]
     @Binding var filmRandomized: Film
     @Binding var historicList: [Film]
+    // add to historic list and randomize again
     var body: some View {
         Button(action: {
             historicList.insert (filmRandomized, at: 0)
@@ -374,12 +378,14 @@ struct headView: View {
     }
 }
 
+//randomized movie and fake favorite button
 struct RandomizedFilm: View {
     @State var heartTapped : Bool = false
     var filmRandomized : Film
     var body: some View {
         VStack {
             ZStack {
+                //link to the description page of the movie
                 NavigationLink {
                     FilmPageView(FilmP: filmRandomized)
                 } label : {
@@ -390,12 +396,13 @@ struct RandomizedFilm: View {
                 }
                 VStack {
                     HStack {
+                        // fake favorite button
                         Button {
                             heartTapped.toggle()
                         } label: {
                             
-                            Image(systemName: heartTapped ?  "heart.fill" : "heart" )
-                                .foregroundColor(heartTapped ? .red : .cinemateWhite)
+                            Image(systemName: heartTapped ?  "heart.fill" : "heart" ) //change heart type when toggled
+                                .foregroundColor(heartTapped ? .red : .cinemateWhite) /:same with color
                                 .font(.title2)
                                 .frame(width: 36, height: 36)
                                 .background(Color.cinemateBlack.opacity(0.7))
@@ -411,10 +418,12 @@ struct RandomizedFilm: View {
                 .font(.staatlichesTitle2())
                 .foregroundStyle(.cinemateWhite)
             HStack {
+                //show all the grenres of the film
                 ForEach(filmRandomized.filmGenres, id: \.self) { genre in
                     Text("\(genre)")
                 }
             }
+            //Show the release date and duration of the film
             Text("\(filmRandomized.filmDate) - \(filmRandomized.filmDurationHours)")
         }
     }
