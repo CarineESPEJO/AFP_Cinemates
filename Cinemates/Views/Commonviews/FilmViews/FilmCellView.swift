@@ -1,4 +1,3 @@
-
 //
 //  FilmCellView.swift
 //  Cinemates
@@ -8,7 +7,7 @@
 
 import SwiftUI
 
-//function to show cerate a cartridge of a movie
+//function to show a cartridge of a movie
 struct FilmCellView: View {
     //it's given a movie to use its infos
     var filmShowed : Film
@@ -21,7 +20,8 @@ struct FilmCellView: View {
                 .scaledToFit()
                 .cornerRadius(8)
                 .shadow(radius: 5)
-            if filmShowed.filmName.count > 24 { //if the name of the movie is too long, we take the beginning and a ...
+            //if the name of the movie is too long, we take the beginning and a ...
+            if filmShowed.filmName.count > 24 { 
                 Text("\(String(filmShowed.filmName.prefix(24)))...")
             } else {
                 Text(filmShowed.filmName)
@@ -52,8 +52,8 @@ struct NotePlatformCellView : View {
                 .scaledToFit()
                 .frame(width: 16, height: 16)
                 .cornerRadius(2)
-            
-            Text(String(format: "%.1f", notePlatform)) // transform note into string that is one number after the virgule
+            // transform note into string that is one number after the virgule
+            Text(String(format: "%.1f", notePlatform)) 
                 
             
         }
