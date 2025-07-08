@@ -18,3 +18,5 @@ You can find my name in all the files where I contributed significantly or wrote
 - code the trailer view (in CommonViews folder)
 - Integrated the trailer View into the FilmPageView
 - Integrated the rating pageView into the togglenotationfilmview 
+
+I put comments on each of my code, if you new to swift, it better to begin with login. In it I try to explain what is each line, on the other files, I just explain what the line (or a group of) serves to do.
