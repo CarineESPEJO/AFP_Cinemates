@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-// put TabBarView as mainView to arrive
 @main
 struct CinematesApp: App {
     var body: some Scene {
         WindowGroup {
+            // changed to link the opening of the app to TabBarView
             TabBarView()
                 .ignoresSafeArea(.keyboard, edges: .bottom)
         }
