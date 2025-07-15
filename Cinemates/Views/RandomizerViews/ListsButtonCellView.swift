@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-//function to create the lists buttons
+//struct to create the lists buttons
 struct ListsButtonCellView: View {
     // take film list to change it
     @Binding var randomizerTotalList : [Film]
