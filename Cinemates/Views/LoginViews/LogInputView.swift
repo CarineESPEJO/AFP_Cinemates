@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-//function to let user input their email o r password
+//struct to let user input their email o r password
 struct LogInputView: View {
     //As its work for email and password, it needs element for front an back
     @Binding var logInput : String
