@@ -167,7 +167,7 @@ struct FilmRatingView: View {
 
     }
     
-    //function to show rating row for each parts
+    //struct to show rating row for each parts
     struct RatingRow: View {
         let title: String
         @Binding var rating: Int
