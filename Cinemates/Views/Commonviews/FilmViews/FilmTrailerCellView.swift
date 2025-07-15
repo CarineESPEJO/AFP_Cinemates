@@ -8,7 +8,7 @@
 import SwiftUI
 import WebKit
 
-//function to show the trailer of the film on its description pageView
+//struct to show the trailer of the film on its description pageView
 struct FilmTrailerCellView: View {
     //take the movie
     var film: Film
