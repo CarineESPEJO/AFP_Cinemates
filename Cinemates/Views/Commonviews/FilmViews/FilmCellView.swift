@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-//function to show a cartridge of a movie
+//struct to show a cartridge of a movie
 struct FilmCellView: View {
     //it's given a movie to use its infos
     var filmShowed : Film
